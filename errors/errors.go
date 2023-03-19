@@ -185,6 +185,16 @@ func Wrap(err error, message string) error {
 	if err == nil {
 		return nil
 	}
+
+	if e, ok := err.(*withCode); ok {
+		return &withCode{
+			err:   fmt.Errorf(message),
+			code:  e.code,
+			cause: err,
+			stack: callers(),
+		}
+	}
+
 	err = &withMessage{
 		cause: err,
 		msg:   message,
@@ -202,6 +212,16 @@ func Wrapf(err error, format string, args ...interface{}) error {
 	if err == nil {
 		return nil
 	}
+
+	if e, ok := err.(*withCode); ok {
+		return &withCode{
+			err:   fmt.Errorf(format, args...),
+			code:  e.code,
+			cause: err,
+			stack: callers(),
+		}
+	}
+
 	err = &withMessage{
 		cause: err,
 		msg:   fmt.Sprintf(format, args...),
@@ -260,6 +280,43 @@ func (w *withMessage) Format(s fmt.State, verb rune) {
 		io.WriteString(s, w.Error())
 	}
 }
+
+type withCode struct {
+	err    error // 错误
+	code   int   // 业务错误码
+	cause  error // cause error
+	*stack       // 错误堆栈
+}
+
+func WithCode(code int, format string, args ...interface{}) error {
+	return &withCode{
+		err:   fmt.Errorf(format, args...),
+		code:  code,
+		stack: callers(),
+	}
+}
+
+func WrapC(err error, code int, format string, args ...interface{}) error {
+	if err != nil {
+		return nil
+	}
+
+	return &withCode{
+		err:   fmt.Errorf(format, args...),
+		code:  code,
+		cause: err,
+		stack: callers(),
+	}
+}
+
+// Error return the externally-safe error message.
+func (w *withCode) Error() string { return fmt.Sprintf("%v", w) }
+
+// Cause return the cause of error the withCode error.
+func (w *withCode) Cause() error { return w.cause }
+
+// Unwrap provides compatibility for Go 1.13 error chains.
+func (w *withCode) Unwrap() error { return w.cause }
 
 // Cause returns the underlying cause of the error, if possible.
 // An error value has a cause if it implements the following

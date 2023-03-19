@@ -47,7 +47,7 @@ func TestWrap(t *testing.T) {
 	for _, tt := range tests {
 		got := Wrap(tt.err, tt.message).Error()
 		if got != tt.want {
-			t.Errorf("Wrap(%v, %q): got: %v, want %v", tt.err, tt.message, got, tt.want)
+			t.Errorf("Wrap(%v, %q): got: %v, want: %v", tt.err, tt.message, got, tt.want)
 		}
 	}
 }
@@ -224,6 +224,58 @@ func TestWithMessagef(t *testing.T) {
 	}
 }
 
+func TestWithCode(t *testing.T) {
+	tests := []struct {
+		code     int
+		message  string
+		wantType string
+		wantCode int
+	}{
+		{ConfigurationNotValid, "ConfigurationNotValid error", "*withCode", ConfigurationNotValid},
+	}
+
+	for _, tt := range tests {
+		got := WithCode(tt.code, tt.message)
+		err, ok := got.(*withCode)
+		if !ok {
+			t.Errorf("WithCode(%v, %q): error type got: %T, want %s", tt.code, tt.message, got, tt.wantType)
+		}
+
+		if err.code != tt.wantCode {
+			t.Errorf("WithCode(%v, %q): got: %v, want %v", tt.code, tt.message, err.code, tt.wantCode)
+		}
+	}
+}
+
+func TestWithCodef(t *testing.T) {
+	tests := []struct {
+		code       int
+		format     string
+		args       string
+		wantType   string
+		wantCode   int
+		wangString string
+	}{
+		{ConfigurationNotValid, "Configuration %s", "failed", "*withCode", ConfigurationNotValid, `ConfigurationNotValid error`},
+	}
+
+	for _, tt := range tests {
+		got := WithCode(tt.code, tt.format, tt.args)
+		err, ok := got.(*withCode)
+		if !ok {
+			t.Errorf("WithCode(%v, %q %q): error type got: %T, want %s", tt.code, tt.format, tt.args, got, tt.wantType)
+		}
+
+		if err.code != tt.wantCode {
+			t.Errorf("WithCode(%v, %q %q): got: %v, want %v", tt.code, tt.format, tt.args, err.code, tt.wantCode)
+		}
+
+		if got.Error() != tt.wangString {
+			t.Errorf("WithCode(%v, %q %q): got: %v, want %v", tt.code, tt.format, tt.args, got.Error(), tt.wangString)
+		}
+	}
+}
+
 // errors.New, etc values are not expected to be compared by value
 // but the change in errors#27 made them incomparable. Assert that
 // various kinds of errors have a functional equality operator, even
@@ -246,6 +298,38 @@ func TestErrorEquality(t *testing.T) {
 	for i := range vals {
 		for j := range vals {
 			_ = vals[i] == vals[j] // mustn't panic
+		}
+	}
+}
+
+func TestParseCoder(t *testing.T) {
+	tests := []struct {
+		err           error
+		wantHttpCode  int
+		wantString    string
+		wantCode      int
+		wantReference string
+	}{
+		{fmt.Errorf("yes error"), 500, "An internal server error occurred", 1, "http://github.com/cuizhaoyue/toolkit/errors/README.md"},
+		{WithCode(unknownCoder.Code(), "internal error message"), 500, "An internal server error occurred", 1, "http://github.com/cuizhaoyue/toolkit/errors/README.md"},
+	}
+
+	for i, tt := range tests {
+		coder := ParseCoder(tt.err)
+		if coder.HTTPStatus() != tt.wantHttpCode {
+			t.Errorf("TestCodeParse(%d): got %q, want: %q", i, coder.HTTPStatus(), tt.wantHttpCode)
+		}
+
+		if coder.String() != tt.wantString {
+			t.Errorf("TestCodeParse(%d): got %q, want: %q", i, coder.String(), tt.wantString)
+		}
+
+		if coder.Code() != tt.wantCode {
+			t.Errorf("TestCodeParse(%d): got %q, want: %q", i, coder.Code(), tt.wantCode)
+		}
+
+		if coder.Reference() != tt.wantReference {
+			t.Errorf("TestCodeParse(%d): got %q, want: %q", i, coder.Reference(), tt.wantReference)
 		}
 	}
 }
