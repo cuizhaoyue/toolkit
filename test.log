@@ -1,0 +1,41 @@
+2023-03-26 16:39:48.565	[35mDEBUG[0m	This is a debug message
+2023-03-26 16:39:48.565	[34mINFO[0m	This is a info message	{"int_key": 10}
+2023-03-26 16:39:48.565	[33mWARN[0m	This is a formatted warn message
+2023-03-26 16:39:48.565	[31mERROR[0m	Message printed with Errorw	{"X-Request-ID": "fbf54504-64da-4088-9b86-67824a7fb508"}
+2023-03-26 16:39:48.565	[34mINFO[0m	Info message printed with [WithValues] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:39:48.565	[34mINFO[0m	Debug message printed with [WithValues] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:39:48.565	[34mINFO[0m	Message printed with [WithContext] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:39:48.565	[34mINFO[0m	test	Message printed with [WithName] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:39:48.565	[34mINFO[0m	This is a V level message
+2023-03-26 16:39:48.565	[31mERROR[0m	This is a V level message with fields	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+{"level":"DEBUG","timestamp":"2023-03-26 16:40:03.774","message":"This is a debug message"}
+{"level":"INFO","timestamp":"2023-03-26 16:40:03.774","message":"This is a info message","int_key":10}
+{"level":"WARN","timestamp":"2023-03-26 16:40:03.774","message":"This is a formatted warn message"}
+{"level":"ERROR","timestamp":"2023-03-26 16:40:03.774","message":"Message printed with Errorw","X-Request-ID":"fbf54504-64da-4088-9b86-67824a7fb508"}
+{"level":"INFO","timestamp":"2023-03-26 16:40:03.774","message":"Info message printed with [WithValues] logger","X-Request-ID":"7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+{"level":"INFO","timestamp":"2023-03-26 16:40:03.774","message":"Debug message printed with [WithValues] logger","X-Request-ID":"7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+{"level":"INFO","timestamp":"2023-03-26 16:40:03.774","message":"Message printed with [WithContext] logger","X-Request-ID":"7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+{"level":"INFO","timestamp":"2023-03-26 16:40:03.774","logger":"test","message":"Message printed with [WithName] logger","X-Request-ID":"7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+{"level":"INFO","timestamp":"2023-03-26 16:40:03.774","message":"This is a V level message"}
+{"level":"ERROR","timestamp":"2023-03-26 16:40:03.774","message":"This is a V level message with fields","X-Request-ID":"7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:41:47.570	DEBUG	This is a debug message
+2023-03-26 16:41:47.570	INFO	This is a info message	{"int_key": 10}
+2023-03-26 16:41:47.570	WARN	This is a formatted warn message
+2023-03-26 16:41:47.570	ERROR	Message printed with Errorw	{"X-Request-ID": "fbf54504-64da-4088-9b86-67824a7fb508"}
+2023-03-26 16:41:47.570	INFO	Info message printed with [WithValues] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:41:47.570	INFO	Debug message printed with [WithValues] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:41:47.570	INFO	Message printed with [WithContext] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:41:47.570	INFO	test	Message printed with [WithName] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:41:47.570	INFO	This is a V level message
+2023-03-26 16:41:47.570	ERROR	This is a V level message with fields	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:43:00.452	DEBUG	This is a debug message
+2023-03-26 16:43:00.452	INFO	This is a info message	{"int_key": 10}
+2023-03-26 16:43:00.452	WARN	This is a formatted warn message
+2023-03-26 16:43:00.452	ERROR	Message printed with Errorw
+2023-03-26 16:43:00.452	ERROR	Message printed with Errorw	{"X-Request-ID": "fbf54504-64da-4088-9b86-67824a7fb508"}
+2023-03-26 16:43:00.452	INFO	Info message printed with [WithValues] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:43:00.452	INFO	Debug message printed with [WithValues] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:43:00.452	INFO	Message printed with [WithContext] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:43:00.452	INFO	test	Message printed with [WithName] logger	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
+2023-03-26 16:43:00.452	INFO	This is a V level message
+2023-03-26 16:43:00.452	ERROR	This is a V level message with fields	{"X-Request-ID": "7a7b9f24-4cae-4b2a-9464-69088b45b904"}
