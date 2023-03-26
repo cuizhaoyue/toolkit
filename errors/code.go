@@ -11,7 +11,7 @@ var (
 		BCode:    1,
 		HttpCode: http.StatusInternalServerError,
 		Ext:      "An internal server error occurred",
-		Ref:      "http://github.com/cuizhaoyue/toolkit/errors/README.md",
+		Ref:      "",
 	}
 )
 
