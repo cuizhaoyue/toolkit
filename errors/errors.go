@@ -297,7 +297,7 @@ func WithCode(code int, format string, args ...interface{}) error {
 }
 
 func WrapC(err error, code int, format string, args ...interface{}) error {
-	if err != nil {
+	if err == nil {
 		return nil
 	}
 
