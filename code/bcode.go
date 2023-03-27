@@ -1,4 +1,4 @@
-package bcode
+package code
 
 import (
 	"github.com/cuizhaoyue/toolkit/errors"

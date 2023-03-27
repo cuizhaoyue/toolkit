@@ -1,4 +1,4 @@
-package bcode
+package code
 
 // 通用: 基本错误
 // Code must start with 1xxxxx
