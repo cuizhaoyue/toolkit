@@ -7,7 +7,7 @@ package code
 // Code must start with 1xxxxx
 const (
 	// ErrSuccess - 200: OK.
-	ErrSuccess = iota + 100001
+	ErrSuccess int = iota + 100001
 
 	// ErrUnknown - 500: Internal server error.
 	ErrUnknown
@@ -25,13 +25,13 @@ const (
 // 通用: 数据库类错误
 const (
 	// ErrDatabase - 500: Database error.
-	ErrDatabase = iota + 100101
+	ErrDatabase int = iota + 100101
 )
 
 // 通用: 认证授权类错误
 const (
 	// ErrEncrypt - 401: Error occurred while encrypting the user password.
-	ErrEncrypt = iota + 100201
+	ErrEncrypt int = iota + 100201
 
 	// ErrSignatureInvalid - 401: Signature is invalid.
 	ErrSignatureInvalid
@@ -55,7 +55,7 @@ const (
 // 通用: 编解码类错误
 const (
 	// ErrEncodingFailed - 500: Encoding failed due to an error with the data.
-	ErrEncodingFailed = iota + 100301
+	ErrEncodingFailed int = iota + 100301
 
 	// ErrDecodingFailed - 500: Decoding failed due to an error with the data.
 	ErrDecodingFailed
